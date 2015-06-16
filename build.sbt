@@ -1,18 +1,14 @@
 sbtPlugin := true
 
-organization := "org.scala-sbt"
+organization := "com.dmp-sbt"
 
 name := "sbt-closure"
 
-version <<= sbtVersion(v =>
-  if(v.startsWith("0.12")) "0.1.3"
-  else if(v.startsWith("0.13")) "0.1.4"
-  else error("unsupported sbt version %s" format v)
-)
+version := "0.1.5"
 
-libraryDependencies += "com.google.javascript" % "closure-compiler" % "r1741"
+libraryDependencies += "com.google.javascript" % "closure-compiler" % "v20150609"
 
-libraryDependencies += "org.scalatest" %% "scalatest" % "1.9.1" % "test"
+libraryDependencies += "org.scalatest" %% "scalatest" % "2.2.4" % "test"
 
 seq(scriptedSettings:_*)
 

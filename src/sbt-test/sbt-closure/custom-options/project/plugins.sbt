@@ -1,1 +1,1 @@
-addSbtPlugin("org.scala-sbt" % "sbt-closure" % "0.1.4")
+addSbtPlugin("com.dmp-sbt" % "sbt-closure" % "0.1.5")

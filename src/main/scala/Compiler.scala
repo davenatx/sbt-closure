@@ -1,17 +1,26 @@
 package sbtclosure
 
-import com.google.javascript.jscomp.{Compiler => ClosureCompiler, CompilerOptions, JSError, JSSourceFile}
+import com.google.javascript.jscomp.{Compiler => ClosureCompiler, CompilerOptions => ClosureCompilerOptions, JSError, SourceFile}
+
+import scala.collection.JavaConversions._
 
 import sbt._
 
-class Compiler(options: CompilerOptions) {
+class Compiler(options: ClosureCompilerOptions) {
 
   def compile(sources: List[File], externs: List[File], target: File, log: Logger): Unit = {
     val compiler = new ClosureCompiler
 
+    val externList = externs.map(SourceFile.fromFile _)
+    val sourceList = sources.map(SourceFile.fromFile _)
+
+    log.debug("sources: " + sourceList.toString)
+    log.debug("externs: " + externList.toString)
+    log.debug("target: " + target.toString)
+    
     val result = compiler.compile(
-      externs.map(JSSourceFile.fromFile _).toArray,
-      sources.map(JSSourceFile.fromFile _).toArray,
+      externList,
+      sourceList,
       options
     )
 
